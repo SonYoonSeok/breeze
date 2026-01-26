@@ -187,6 +187,29 @@ breeze/
 - 📝 **Notion 자동 정리**: 강의 제목별로 페이지 자동 생성
 - 💾 **상태 지속성**: 팝업 닫아도 녹음 유지
 
+---
+
+## 🤖 AI-Assisted Development
+
+이 프로젝트는 **Claude (Anthropic) AI**를 활용하여 개발되었습니다.
+
+**개발 방식**: 개발자는 아이디어와 요구사항을 제시하고, AI가 코드 작성, 아키텍처 설계, 디버깅, 문서화까지 수행
+
+**AI가 작성한 주요 파일**:
+- Extension: `background.ts`, `content.tsx`, `PopupComponent.tsx`, Zustand stores
+- Server: `main.py` (SessionManager, VisionAgent, STTAgent, SummaryAgent, NotionAgent)
+
+**AI가 해결한 문제들**:
+1. WebSocket 연동 (Popup → Background Service Worker)
+2. 슬라이드 감지 (숨겨진 video element → 1px visible)
+3. 프레임 비교 최적화 (pixel → 문자열 비교)
+4. Notion API 메서드 수정 (POST → PATCH)
+5. 상태 지속성 (chrome.storage 활용)
+
+**개발 시간**: 약 6-8시간 (AI가 코드 작성, 개발자는 피드백만 제공)
+
+---
+
 ## 사용법
 
 ### 사전 준비
@@ -273,27 +296,6 @@ NOTION_PARENT_PAGE_ID=...
 - [ ] 요약 스타일 선택 (상세, 간단, 불렛 포인트 등)
 - [ ] 다중 언어 지원
 - [ ] 녹음 파일 다운로드
-
----
-
-## 🤖 AI-Assisted Development
-
-이 프로젝트는 **Claude (Anthropic) AI**를 활용하여 개발되었습니다.
-
-**개발 방식**: 개발자는 아이디어와 요구사항을 제시하고, AI가 코드 작성, 아키텍처 설계, 디버깅, 문서화까지 수행
-
-**AI가 작성한 주요 파일**:
-- Extension: `background.ts`, `content.tsx`, `PopupComponent.tsx`, Zustand stores
-- Server: `main.py` (SessionManager, VisionAgent, STTAgent, SummaryAgent, NotionAgent)
-
-**AI가 해결한 문제들**:
-1. WebSocket 연동 (Popup → Background Service Worker)
-2. 슬라이드 감지 (숨겨진 video element → 1px visible)
-3. 프레임 비교 최적화 (pixel → 문자열 비교)
-4. Notion API 메서드 수정 (POST → PATCH)
-5. 상태 지속성 (chrome.storage 활용)
-
-**개발 시간**: 약 6-8시간 (AI가 코드 작성, 개발자는 피드백만 제공)
 
 ## 라이선스
 
