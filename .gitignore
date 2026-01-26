@@ -1,11 +1,164 @@
-# Extension
-extension/node_modules/
-extension/dist/
-extension/.DS_Store
+# =============================================================================
+# Extension (React + Vite + Chrome Extension)
+# =============================================================================
 
-# Server
+# Dependencies
+extension/node_modules/
+extension/.pnpm-store/
+
+# Build output
+extension/dist/
+extension/build/
+
+# Environment
+extension/.env
+extension/.env.local
+extension/.env.*.local
+
+# Logs
+extension/npm-debug.log*
+extension/yarn-debug.log*
+extension/yarn-error.log*
+extension/pnpm-debug.log*
+
+# Editor
+extension/.vscode/*
+!.extension/.vscode/settings.json
+!.extension/.vscode/tasks.json
+!.extension/.vscode/launch.json
+!.extension/.vscode/extensions.json
+extension.idea/
+extension*.suo
+extension*.ntvs*
+extension*.njsproj
+extension*.sln
+extension*.sw?
+
+# OS
+extension.DS_Store
+extension/.DS_Store
+extension/Thumbs.db
+
+# Testing
+extension/coverage/
+extension/.nyc_output/
+
+# Misc
+extension/.eslintcache
+
+# =============================================================================
+# Server (Python + FastAPI)
+# =============================================================================
+
+# Byte-compiled / optimized / DLL files
 server/__pycache__/
-server/*.pyc
-server/.env
+server/*/__pycache__/
+server/*/*/__pycache__/
+server/*.py[cod]
+server/*$py.class
+
+# C extensions
+server/*.so
+
+# Distribution / packaging
+server/.Python
+server/build/
+server/develop-eggs/
+server/dist/
+server/downloads/
+server/eggs/
+server/.eggs/
+server/lib/
+server/lib64/
+server/parts/
+server/sdist/
+server/var/
+server/wheels/
+server/share/python-wheels/
+server/*.egg-info/
+server/.installed-files.txt
+server/*.egg
+
+# Virtual environments
 server/.venv/
+server/venv/
+server/ENV/
+server/env/
+server/venv.bak/
+server/venv.bak/
+
+# PyInstaller
+server/*.manifest
+server/*.spec
+
+# Unit test / coverage reports
+server/htmlcov/
+server/.tox/
+server/.coverage
+server/.coverage.*
+server/.cache
+server/nosetests.xml
+server/coverage.xml
+server/*.cover
+server/*.py,cover
+server/.hypothesis/
+server/.pytest_cache/
+
+# Environments
+server/.env
+server/.env.local
+server/.env.*.local
+server/flask/.env
+server/.webassets-cache
+
+# mypy
+server/.mypy_cache/
+server/.dmypy.json
+server/dmypy.json
+
+# Pyre type checker
+server/.pyre/
+
+# pytype
+server/.pytype/
+
+# Cython
+server/cython_debug/
+
+# pipenv
 server/Pipfile.lock
+
+# =============================================================================
+# Shared
+# =============================================================================
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editor
+.vscode/*
+!.vscode/settings.json
+.idea/
+*.swp
+*.swo
+*~
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
