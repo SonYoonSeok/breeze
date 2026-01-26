@@ -6,42 +6,42 @@
 
 ---
 
-## 🤖 AI Agent 아키텍처
+## 🤖 AI 활용 아키텍처
 
-이 프로젝트는 **다중 AI 에이전트 시스템(Multi-Agent System)**으로 설계되었습니다. 각 에이전트는 독립적인 역할을 수행하며 서로 협력하여 강의 요약 작업을 완수합니다.
+이 프로젝트는 **Vision AI와 Generative AI**를 활용하여 강의를 자동으로 요약합니다.
 
-### AI Agent Pipeline
+### 처리 파이프라인
 
 ```mermaid
 graph LR
-    A[VisionAgent<br/>Gemini/GPT-4o Vision<br/>OCR 분석] --> B[STTAgent<br/>Whisper<br/>음성 인식]
+    A[VisionAgent<br/>Gemini/GPT-4o Vision<br/>OCR 분석] --> B[STTAgent<br/>Whisper API<br/>음성 인식]
     B --> C[SummaryAgent<br/>Gemini/GPT-4o<br/>통합 요약]
     C --> D[NotionAgent<br/>Notion API<br/>자동 업로드]
 
-    style A fill:#e3f2fd
-    style B fill:#fff3e0
-    style C fill:#f3e5f5
-    style D fill:#e8f5e9
+    style A fill:#e3f2fd,stroke:#1565c0
+    style B fill:#fff3e0,stroke:#ef6c00
+    style C fill:#f3e5f5,stroke:#7b1fa2
+    style D fill:#e8f5e9,stroke:#2e7d32
 ```
 
-### AI Agent별 역할
+### 컴포넌트별 역할
 
-**1. VisionAgent**
-- Gemini 2.0 Flash / GPT-4o Vision
+**👁️ VisionAgent (AI)**
+- Gemini 2.0 Flash / GPT-4o Vision API
 - 슬라이드 이미지 OCR 분석
 - 텍스트 추출, 도표 감지, 내용 설명
 
-**2. STTAgent**
-- OpenAI Whisper
+**🎤 STTAgent**
+- OpenAI Whisper API 호출
 - 강의 음성을 텍스트 변환
 - 한국어 특화 모델
 
-**3. SummaryAgent**
-- Gemini / GPT-4o
+**🤖 SummaryAgent (AI)**
+- Gemini / GPT-4o API
 - VisionAgent + STTAgent 결과 통합
-- 강의 주요 내용 요약 및 구조화 (Markdown)
+- 강의 주요 내용 요약 및 Markdown 구조화
 
-**4. NotionAgent**
+**📝 NotionAgent**
 - Notion API 연동
 - Markdown → Notion 블록 변환
 - 강의 제목별 자동 페이지 생성
