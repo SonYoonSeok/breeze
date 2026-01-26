@@ -46,16 +46,6 @@ graph LR
 - Markdown → Notion 블록 변환
 - 강의 제목별 자동 페이지 생성
 
-### 왜 AI Agent인가요?
-
-| 전통적 방식 | Breeze AI Agent 방식 |
-|-----------|---------------------|
-| 고정된 템플릿에 데이터만 채움 | AI가 맥락을 이해하고 동적으로 요약 |
-| 단일 AI 모델 사용 | **4개의 전문화된 AI Agent** 협력 |
-| 도표/이미지 분석 불가 | **Vision Agent**가 도표까지 인식 |
-| 음성/시각 정보 독립 처리 | **Multi-Modal Fusion**으로 통합 |
-| 수동으로 Notion 정리 | **Agent Orchestration**으로 자동화 |
-
 ## 시스템 아키텍처
 
 ```mermaid
