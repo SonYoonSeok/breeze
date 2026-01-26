@@ -6,62 +6,61 @@
 
 ## 아키텍처
 
+```mermaid
+graph TB
+    subgraph Browser["크롬 브라우저"]
+        Popup["Popup UI<br/>(Zustand)"]
+        Content["Content Script<br/>(화면 캡처)"]
+        BG["Background<br/>WebSocket 클라이언트"]
+        Popup <--> Content
+        Content --> BG
+    end
+
+    subgraph Server["FastAPI Server"]
+        Session["SessionManager<br/>세션 상태 관리"]
+        Vision["VisionAgent<br/>OCR 분석"]
+        STT["STTAgent<br/>Whisper 변환"]
+        Summary["SummaryAgent<br/>AI 요약"]
+        NotionAgent["NotionAgent<br/>블록 변환/업로드"]
+
+        Session --> Vision
+        Session --> STT
+        Vision --> Summary
+        STT --> Summary
+        Summary --> NotionAgent
+    end
+
+    subgraph External["외부 서비스"]
+        Gemini["Gemini/GPT-4o<br/>Vision API"]
+        Whisper["OpenAI Whisper<br/>STT API"]
+        AI["Gemini/GPT-4o<br/>Summary API"]
+        Notion["Notion API"]
+    end
+
+    BG -->|WebSocket| Session
+    Vision --> Gemini
+    STT --> Whisper
+    Summary --> AI
+    NotionAgent --> Notion
+
+    style Browser fill:#e1f5fe
+    style Server fill:#f3e5f5
+    style External fill:#fff3e0
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                              사용자 (크롬 브라우저)                          │
-│  ┌──────────────┐         ┌──────────────┐                                 │
-│  │   Popup UI   │         │Content Script│                                 │
-│  │ (Zustand)    │◄────────┤   (녹화/캡처) │                                 │
-│  └──────┬───────┘         └──────┬───────┘                                 │
-│         │                         │                                          │
-│         v                         v                                          │
-│  ┌──────────────────────────────────────────────┐                          │
-│  │          Background Service Worker           │                          │
-│  │  ┌─────────────────────────────────────┐    │                          │
-│  │  │         WebSocket 클라이언트          │    │                          │
-│  │  └─────────────────────────────────────┘    │                          │
-│  └──────────────────┬───────────────────────────┘                          │
-└─────────────────────┼──────────────────────────────────────────────────────┘
-                      │
-                      │ WebSocket (ws://localhost:8000/ws/{session_id})
-                      │
-                      v
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                           FastAPI Server                                    │
-│  ┌────────────────────────────────────────────────────────────────────┐     │
-│  │                       SessionManager                                │     │
-│  │  • 세션 상태 관리 (title, slides, audio_chunks, slide_analyses)     │     │
-│  └────────────────────────────────────────────────────────────────────┘     │
-│                      │              │              │                         │
-│  ┌───────────────┐  │  ┌───────────────┐  │  ┌───────────────┐            │
-│  │  VisionAgent  │  │  │    STTAgent   │  │  │ SummaryAgent  │            │
-│  │               │  │  │               │  │  │               │            │
-│  │ • 이미지 수신  │  │  │ • 오디오 수신  │  │  │ • 슬라이드    │            │
-│  │ • OCR 분석    │  │  │ • Whisper 변환│  │  │   분석 통합   │            │
-│  │ • Gemini/GPT  │  │  │ • 텍스트 반환  │  │  │ • AI 요약     │            │
-│  └───────────────┘  │  └───────────────┘  │  │ • Gemini/GPT  │            │
-│                     │                     │  └───────────────┘            │
-│                     v                     v              │                 │
-│              (Slide Analysis)        (Transcript)      │                 │
-│                                                     │  │                 │
-│                                                     v  v                 │
-│  ┌──────────────────────────────────────────────────────────────────┐     │
-│  │                        NotionAgent                               │     │
-│  │  • Markdown → Notion 블록 변환                                    │     │
-│  │  • 강의 제목 페이지 생성                                          │     │
-│  │  • 요약 내용 추가                                                  │     │
-│  └──────────────────────────────────────────────────────────────────┘     │
-│                      │                                                    │
-└──────────────────────┼────────────────────────────────────────────────────┘
-                       │
-                       │ HTTPS (Notion API)
-                       v
-              ┌─────────────────┐
-              │     Notion      │
-              │  • 강의 제목     │
-              │  • 요약 내용     │
-              └─────────────────┘
-```
+
+### 컴포넌트 설명
+
+#### 크롬 익스텐션
+- **Popup UI**: 사용자 인터페이스 (녹화 시작/중지, 강의 제목 입력)
+- **Content Script**: 화면 공유 캡처, 슬라이드 변경 감지 (30초 간격)
+- **Background**: WebSocket 연결 관리, 메시지 중계
+
+#### FastAPI 서버
+- **SessionManager**: 세션 상태 저장 (제목, 슬라이드, 오디오, 분석 결과)
+- **VisionAgent**: 슬라이드 이미지 OCR 분석
+- **STTAgent**: 오디오를 텍스트로 변환
+- **SummaryAgent**: 슬라이드 + 음성 통합 요약
+- **NotionAgent**: Markdown을 Notion 블록으로 변환 후 업로드
 
 ## 데이터 흐름
 
