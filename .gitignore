@@ -1,0 +1,11 @@
+# Extension
+extension/node_modules/
+extension/dist/
+extension/.DS_Store
+
+# Server
+server/__pycache__/
+server/*.pyc
+server/.env
+server/.venv/
+server/Pipfile.lock
