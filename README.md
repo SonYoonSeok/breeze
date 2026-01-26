@@ -10,42 +10,41 @@
 
 이 프로젝트는 **다중 AI 에이전트 시스템(Multi-Agent System)**으로 설계되었습니다. 각 에이전트는 독립적인 역할을 수행하며 서로 협력하여 강의 요약 작업을 완수합니다.
 
-### AI Agent 구성
+### AI Agent Pipeline
 
+```mermaid
+graph LR
+    A[VisionAgent<br/>Gemini/GPT-4o Vision<br/>OCR 분석] --> B[STTAgent<br/>Whisper<br/>음성 인식]
+    B --> C[SummaryAgent<br/>Gemini/GPT-4o<br/>통합 요약]
+    C --> D[NotionAgent<br/>Notion API<br/>자동 업로드]
+
+    style A fill:#e3f2fd
+    style B fill:#fff3e0
+    style C fill:#f3e5f5
+    style D fill:#e8f5e9
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                        AI Agent Pipeline                        │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                 │
-│  1. VisionAgent                                                │
-│     • Gemini 2.0 Flash / GPT-4o Vision                         │
-│     • 슬라이드 이미지 OCR 분석                                 │
-│     • 텍스트 추출, 도표 감지, 내용 설명                        │
-│                                                                 │
-│           ↓ (분석 결과 전달)                                   │
-│                                                                 │
-│  2. STTAgent                                                   │
-│     • OpenAI Whisper                                           │
-│     • 강의 음성을 실시간 텍스트 변환                            │
-│     • 한국어 특화 모델                                          │
-│                                                                 │
-│           ↓ (트랜스크립트 전달)                                │
-│                                                                 │
-│  3. SummaryAgent                                               │
-│     • Gemini / GPT-4o                                          │
-│     • VisionAgent + STTAgent 결과 통합                         │
-│     • 강의 주요 내용 요약 및 구조화                             │
-│     • Markdown 형식 출력                                        │
-│                                                                 │
-│           ↓ (요약본 전달)                                      │
-│                                                                 │
-│  4. NotionAgent                                                │
-│     • Notion API 연동                                          │
-│     • Markdown → Notion 블록 변환                              │
-│     • 강의 제목별 자동 페이지 생성                              │
-│                                                                 │
-└─────────────────────────────────────────────────────────────────┘
-```
+
+### AI Agent별 역할
+
+**1. VisionAgent**
+- Gemini 2.0 Flash / GPT-4o Vision
+- 슬라이드 이미지 OCR 분석
+- 텍스트 추출, 도표 감지, 내용 설명
+
+**2. STTAgent**
+- OpenAI Whisper
+- 강의 음성을 텍스트 변환
+- 한국어 특화 모델
+
+**3. SummaryAgent**
+- Gemini / GPT-4o
+- VisionAgent + STTAgent 결과 통합
+- 강의 주요 내용 요약 및 구조화 (Markdown)
+
+**4. NotionAgent**
+- Notion API 연동
+- Markdown → Notion 블록 변환
+- 강의 제목별 자동 페이지 생성
 
 ### 왜 AI Agent인가요?
 
@@ -57,7 +56,7 @@
 | 음성/시각 정보 독립 처리 | **Multi-Modal Fusion**으로 통합 |
 | 수동으로 Notion 정리 | **Agent Orchestration**으로 자동화 |
 
-## 아키텍처
+## 시스템 아키텍처
 
 ```mermaid
 graph TB
