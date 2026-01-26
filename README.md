@@ -252,6 +252,12 @@ pipenv run python main.py
 6. "중지" 클릭
 7. Notion에 자동 업로드 완료!
 
+**크롬 익스텐션 사용 예시**
+<img width="1470" height="827" alt="스크린샷 2026-01-26 오후 10 20 31" src="https://github.com/user-attachments/assets/ea183949-bf68-4a17-85b8-b55e85e9375f" />
+
+**노션 요약 내용 예시**
+<img width="942" height="816" alt="스크린샷 2026-01-26 오후 10 21 15" src="https://github.com/user-attachments/assets/ea6922e2-75df-432b-a366-3c48e74be627" />
+
 ## 환경 변수
 
 ```bash
