@@ -1,15 +1,8 @@
 # Breeze
 
-> **AI-Assisted Development: 100% AI가 작성한 강의 자동 요약 시스템**
+> 강의를 편하게 녹음하고 요약해주는 크롬 익스텐션 + 서버
 
-**⚠️ 이 프로젝트의 모든 코드는 Claude (Anthropic)에 의해 작성되었습니다.**
-
-개발자는 아이디어를 제시하고 요구사항을 전달했을 뿐, 실제 구현은 AI가 전담했습니다:
-- ✍️ **모든 소스 코드**: AI가 작성
-- 🏗️ **아키텍처 설계**: AI가 제안
-- 🐛 **디버깅**: AI가 해결
-- 📝 **이 README**: AI가 작성
-- 🚀 **Git 커밋 메시지**: AI가 작성
+화면 공유로 강의를 녹음하면 슬라이드 변경을 자동 감지하고, AI가 분석해서 Notion에 예쁘게 정리해줍니다.
 
 ---
 
@@ -296,60 +289,22 @@ NOTION_PARENT_PAGE_ID=...
 
 ## 🤖 AI-Assisted Development
 
-이 프로젝트는 **Claude (Anthropic) AI를 활용하여 개발되었습니다.**
+이 프로젝트는 **Claude (Anthropic) AI**를 활용하여 개발되었습니다.
 
-### 개발 방식
+**개발 방식**: 개발자는 아이디어와 요구사항을 제시하고, AI가 코드 작성, 아키텍처 설계, 디버깅, 문서화까지 수행
 
-```
-개발자의 역할                  AI의 역할
-─────────────────            ─────────────────
-아이디어 제시            →    요구사항 분석
-기능 설명                 →    아키텍처 설계
-"이거 구현해줘"            →    코드 작성
-에러 로그 보여주기         →    디버깅 & 수정
-"이 부분 고쳐줘"          →    리팩토링
-"README 작성해줘"         →    문서 작성
-```
+**AI가 작성한 주요 파일**:
+- Extension: `background.ts`, `content.tsx`, `PopupComponent.tsx`, Zustand stores
+- Server: `main.py` (SessionManager, VisionAgent, STTAgent, SummaryAgent, NotionAgent)
 
-### AI가 작성한 파일들
+**AI가 해결한 문제들**:
+1. WebSocket 연동 (Popup → Background Service Worker)
+2. 슬라이드 감지 (숨겨진 video element → 1px visible)
+3. 프레임 비교 최적화 (pixel → 문자열 비교)
+4. Notion API 메서드 수정 (POST → PATCH)
+5. 상태 지속성 (chrome.storage 활용)
 
-**크롬 익스텐션 (Extension)**
-- `src/background.ts` - Service Worker WebSocket 통신
-- `src/content.tsx` - 화면 캡처 및 슬라이드 감지
-- `src/PopupComponent.tsx` - React UI 컴포넌트
-- `src/store/recordingStore.ts` - Zustand 상태 관리
-- `src/store/websocketStore.ts` - WebSocket 상태 관리
-
-**서버 (Server)**
-- `main.py` - FastAPI 서버 전체
-  - `SessionManager` - 세션 상태 관리
-  - `VisionAgent` - OCR 분석 (Gemini/GPT-4o)
-  - `STTAgent` - 음성 인식 (Whisper)
-  - `SummaryAgent` - AI 요약 (Gemini/GPT-4o)
-  - `NotionAgent` - Notion API 연동
-
-### 개발 과정에서 AI가 해결한 문제들
-
-1. **WebSocket 연결 문제** - Popup에서 직접 연결 시도 → Background Service Worker로 이동
-2. **슬라이드 감지 실패** - 숨겨진 video element 업데이트 안 됨 → 1px visible로 수정
-3. **프레임 비교 오류** - 복잡한 pixel 비교 → 단순 문자열 비교로 변경
-4. **Notion API 400 에러** - POST 메서드 → PATCH 메서드로 수정
-5. **상태 지속성** - 팝업 닫으면 상태 소실 → chrome.storage로 해결
-
-### 개발 시간
-
-- **총 개발 기간**: 1일 (약 6-8시간)
-- **개발자의 실제 코딩 시간**: 0분
-- **AI가 작성한 코드 라인**: 1,000+ 라인
-
-### 결론
-
-이 프로젝트는 **AI가 개발자를 대신하여 코딩, 디버깅, 문서화까지 수행한 사례**입니다.
-개발자는 아이디어와 피드백만 제공했을 뿐, 모든 구현은 AI가 담당했습니다.
-
-> **"AI는 개발자를 대체하지 않는다. AI를 잘 활용하는 개발자가 대체될 것이다."**
->
-> — 이 프로젝트가 증명하는 명제
+**개발 시간**: 약 6-8시간 (AI가 코드 작성, 개발자는 피드백만 제공)
 
 ## 라이선스
 
