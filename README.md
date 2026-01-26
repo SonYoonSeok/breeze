@@ -252,11 +252,21 @@ pipenv run python main.py
 6. "중지" 클릭
 7. Notion에 자동 업로드 완료!
 
-**크롬 익스텐션 사용 예시**
-<img width="1470" height="827" alt="스크린샷 2026-01-26 오후 10 20 31" src="https://github.com/user-attachments/assets/ea183949-bf68-4a17-85b8-b55e85e9375f" />
+### 사용 예시
 
-**노션 요약 내용 예시**
-<img width="942" height="816" alt="스크린샷 2026-01-26 오후 10 21 15" src="https://github.com/user-attachments/assets/ea6922e2-75df-432b-a366-3c48e74be627" />
+**크롬 익스텐션**
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/ea183949-bf68-4a17-85b8-b55e85e9375f" width="600" alt="Breeze Chrome Extension" />
+</p>
+
+강의 제목을 입력하고 녹화를 시작하면, 슬라이드가 변경될 때마다 자동으로 캡처됩니다.
+
+**Notion 요약 결과**
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/ea6922e2-75df-432b-a366-3c48e74be627" width="500" alt="Notion Summary Example" />
+</p>
+
+녹화 중지 시 AI가 슬라이드 분석 결과를 종합하여 자동으로 요약을 생성하고, Notion에 정리된 형태로 업로드됩니다.
 
 ## 환경 변수
 
